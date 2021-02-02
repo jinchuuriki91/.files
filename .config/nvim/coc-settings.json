@@ -1,0 +1,7 @@
+{
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.venvPath": "/home/gandhar/.virtualenvs",
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "python.formatting.blackPath"
+}
