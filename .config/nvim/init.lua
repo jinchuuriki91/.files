@@ -10,6 +10,8 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+cmd('syntax on')
+cmd('colorscheme onedark')
 g.mapleader = " "
 opt.cursorline = true
 opt.splitbelow = true
@@ -17,6 +19,7 @@ opt.splitright = true
 opt.scrolloff = 4
 opt.sidescrolloff = 8
 opt.list = true
+opt.listchars = 'tab:>-,trail:~,extends:>,precedes:<,lead:.'
 opt.swapfile = false
 opt.wrap = false
 opt.backup = false
@@ -56,6 +59,8 @@ map('', '<leader>d', '<cmd>bd<CR>')
 
 
 require('plugins')
-local lsp = require('lspconfig')
+local zen_mode = require('zen-mode')
+zen_mode.setup {}
+-- local lsp = require('lspconfig')
 
-lsp.pyright.setup{}
+-- lsp.pyright.setup{}
