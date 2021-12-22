@@ -5,12 +5,12 @@ local g = vim.g      -- a table to access global variables
 local opt = vim.opt  -- to set options
 
 local function map(mode, lhs, rhs, opts)
-  local options = {noremap = true}
-  if opts then options = vim.tbl_extend('force', options, opts) end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    local options = {noremap = true}
+    if opts then options = vim.tbl_extend('force', options, opts) end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-cmd('syntax on')
+cmd('filetype plugin indent on')
 cmd('colorscheme onedark')
 g.mapleader = " "
 opt.cursorline = true
@@ -25,6 +25,9 @@ opt.wrap = false
 opt.backup = false
 opt.completeopt= { 'menuone', 'noinsert', 'noselect'}
 opt.showtabline = 1
+opt.foldlevel = 20
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- Search
 opt.nu = true
@@ -61,6 +64,43 @@ map('', '<leader>d', '<cmd>bd<CR>')
 require('plugins')
 local zen_mode = require('zen-mode')
 zen_mode.setup {}
+
+local treesitter = require('nvim-treesitter.configs')
+treesitter.setup {
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false
+    },
+    ensured_installed = {
+        "tsx",
+        "yaml",
+        "javascript",
+        "dockerfile",
+        "typescript",
+        "vue",
+        "scss",
+        "toml",
+        "python",
+        "lua",
+        "json",
+        "java",
+        "html",
+        "graphql",
+        "go",
+        "css",
+        "cpp",
+        "bash"
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+        },
+    },
+}
 -- local lsp = require('lspconfig')
 
 -- lsp.pyright.setup{}
